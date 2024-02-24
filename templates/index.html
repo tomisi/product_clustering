@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clustered Products</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS styles */
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            padding: 20px;
+        }
+        .cluster {
+            margin-bottom: 40px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            color: #6c757d;
+        }
+        .card-img-top {
+            max-height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% for cluster, products in products.items() %}
+        <h2 class="text-center mt-4 mb-5">Cluster {{ cluster }}</h2>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ product['Image Path'] }}" class="card-img-top" alt="{{ product['Product Name'] }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product['Product Name'] }}</h5>
+                        <p class="card-text">Price: ${{ product['Price'] }}</p>
+                        <p class="card-text">Rating: {{ product['Rating'] }}/5</p>
+                        <p class="card-text">Availability: {{ product['Availability'] }}</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
